@@ -8,6 +8,7 @@ import {
   Input,
   Button
 } from "@chakra-ui/react";
+import { useProductStore } from "../store/product";
 const CreatePage = () => {
   const [newProduct, setNewProduct] = useState({
     name: "",
@@ -15,8 +16,11 @@ const CreatePage = () => {
     image: "",
   });
 
+  const {createProduct} = useProductStore()
   const handleAddProduct = async () => {
-    console.log(newProduct);
+    const {success, message} = await createProduct(newProduct);
+    console.log("Success:", success);
+    console.log("Message:", message);
   };
   return (
     <Container maxW={"container.sm"}>
